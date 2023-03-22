@@ -3,7 +3,20 @@ import{AiOutlineEye} from "react-icons/ai"
 import{TbSelector} from "react-icons/tb"
 import {RiImageAddLine} from "react-icons/ri"
 
+import { useDrag, useDrop } from 'react-dnd'
+import {useState} from "react";
+
+import Display from "./components/Display";
+import Operations from "./components/Operations";
+import Canvas from "./components/Canvas";
+import Numbers from "./components/Numbers";
+import Result from "./components/Result";
+
+
+
+
 function App() {
+
   return(
       <div className="App container">
             <div className="container-btns">
@@ -12,42 +25,12 @@ function App() {
             </div>
           <div className="section-wrapper">
               <section className="elements">
-                  <div className="display-wrap">
-                      <input type="text" placeholder="0"/>
-                  </div>
-                  <div className="operations-wrap">
-                      <button className="operation">/</button>
-                      <button className="operation">x</button>
-                      <button className="operation">-</button>
-                      <button className="operation">+</button>
-                  </div>
-                  <div className="numbers-wrap">
-                      <button className="number">7</button>
-                      <button className="number">8</button>
-                      <button className="number">9</button>
-                      <button className="number">4</button>
-                      <button className="number">5</button>
-                      <button className="number">6</button>
-                      <button className="number">1</button>
-                      <button className="number">2</button>
-                      <button className="number">3</button>
-                      <button className="number stretch">0</button>
-                      <button className="number">,</button>
-                  </div>
-                  <div className="result-wrap">
-                      <button className="number-btn">=</button>
-                  </div>
+                  <Display />
+                  <Operations />
+                  <Numbers/>
+                  <Result/>
               </section>
-              <section className="canvas">
-                  <RiImageAddLine className="icon-img"/>
-                  <p>
-                      <span className="canvas-header">Перетащите сюда</span>
-                      <br/>
-                      <span className="canvas-p">любой элемент</span>
-                      <br/>
-                      <span className="canvas-p">из левой панели</span>
-                  </p>
-              </section>
+                <Canvas/>
           </div>
 
       </div>
