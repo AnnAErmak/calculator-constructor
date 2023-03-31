@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/AnnAErmak/calculator-constructor.git/static/css/main.5b5d487d.css",
+    "main.js": "/AnnAErmak/calculator-constructor.git/static/js/main.5ed610e0.js",
+    "index.html": "/AnnAErmak/calculator-constructor.git/index.html",
+    "main.5b5d487d.css.map": "/AnnAErmak/calculator-constructor.git/static/css/main.5b5d487d.css.map",
+    "main.5ed610e0.js.map": "/AnnAErmak/calculator-constructor.git/static/js/main.5ed610e0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5b5d487d.css",
+    "static/js/main.5ed610e0.js"
+  ]
+}
