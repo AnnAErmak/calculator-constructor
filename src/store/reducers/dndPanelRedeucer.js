@@ -1,5 +1,4 @@
 const initialState = {
-    // stateList: ['', '', '', '', ''],
     dndPanelList:[
         {
             id: 1,
@@ -30,7 +29,6 @@ const CHANGE_ACTIVE = 'CHANGE_ACTIVE'
 export const dndPanelReducer = (state = initialState, action) => {
     switch (action.type) {
         case CHANGE_ACTIVE:
-            console.log(action.payload)
             state.dndPanelList.forEach(panel => {if(panel.id === action.payload) panel.isStatic = !panel.isStatic})
             return {
                 ...state,

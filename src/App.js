@@ -1,34 +1,18 @@
 import "./App.css";
-import{AiOutlineEye} from "react-icons/ai"
-import{TbSelector} from "react-icons/tb"
-import {RiImageAddLine} from "react-icons/ri"
-
-import Canvas from "./components/Canvas";
-
-
-import DnDPanel from "./components/DnDPanel";
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {
-    getResultofOperation,
-    addCharacterToString,
-    addEmptyString,
-    delOneCharacter
-} from "./store/reducers/ExpressionReducer";
+import{AiOutlineEye} from "react-icons/ai"
+import{TbSelector} from "react-icons/tb"
+import Canvas from "./components/Canvas";
+import DnDPanel from "./components/DnDPanel";
 import {toggleMode} from "./store/reducers/modeReducer";
 
 function App() {
 
     const dispatch =useDispatch()
-    const {expression} = useSelector(state => state.expressionReducer)
     const {isRuntime} = useSelector(state => state.modeReducer)
     const {dndPanelList} = useSelector(state => state.dndPanelReducer)
 
-
-
-    // console.log(`app: ${isRuntime}`)
-    // console.log(`app: ${expression}`)
-     console.log(dndPanelList)
   return(
       <div className="App container">
             <div className="container-btns">
@@ -40,8 +24,6 @@ function App() {
                   <DnDPanel
                       classPanel={`display-wrap ${dndPanelList[0].isStatic ? 'static' : ''}`}
                       id={1}
-                      // style={{pointerEvents: 'none'}}
-                      draggable={false}
                   >
                       <input type="text" placeholder={0} disabled draggable={false}/>
                   </DnDPanel>

@@ -1,9 +1,11 @@
+import React from "react";
 import {useState} from "react";
 import {useDrop} from "react-dnd";
-import {Reorder} from "framer-motion"
-import {RiImageAddLine} from "react-icons/ri";
 import {useDispatch, useSelector} from "react-redux";
+import {Reorder} from "framer-motion"
+import {v4 as uuidv4} from 'uuid';
 
+import {RiImageAddLine} from "react-icons/ri";
 import DnDPanel from "./DnDPanel";
 import {
     addCharacterToString,
@@ -11,8 +13,7 @@ import {
     delOneCharacter,
     getResultofOperation
 } from "../store/reducers/ExpressionReducer";
-import React from "react";
-import {v4 as uuidv4} from 'uuid';
+import {changeActive} from "../store/reducers/dndPanelRedeucer";
 
 const Canvas = () => {
 
@@ -46,8 +47,16 @@ const Canvas = () => {
         )
     }))
 
-    function handleClickBtnResult(){
+    function deletedDisplayHandler (){
+        setDisplay([])
+        dispatch(changeActive(1))
+    }
+    function deletedDnDPanelHandler (id){
+        setElements(elements.filter((el) => el.id !== id))
+        dispatch(changeActive(id))
+    }
 
+    function handleClickBtnResult(){
         try{
             if(expression.search(/[^0-9*/+-.]/mi) !== -1) return
             const result = eval(expression).toFixed(2)
@@ -82,7 +91,6 @@ const Canvas = () => {
                 </div>
             )
         }
-
         return (
             <div id={item.id} className='numbers-wrap'>
                 {item.children.map(btn => <button
@@ -100,10 +108,6 @@ const Canvas = () => {
         background = 'linear-gradient(0deg, #F0F9FF, #F0F9FF), linear-gradient(0deg, #C4C4C4, #C4C4C4)'
     }
 
-    // console.log(`canvas: ${isRuntime}`)
-    // console.log(`canvas: ${expression}`)
-    // console.log(elements)
-
     return (
         <section className="canvas"
                  ref={drop}
@@ -115,14 +119,14 @@ const Canvas = () => {
                  }}
         >
             {!!display.length && (
-                <div id={display[0].id} className='display-wrap'>
+                <div id={display[0].id} className='display-wrap' onDoubleClick={isRuntime? ()=>{} :() => deletedDisplayHandler()}>
                     <input type="text" placeholder={0} value={expression} disabled/>
                 </div>
             )}
 
-            <Reorder.Group  values={elements} onReorder={setElements}>
+            <Reorder.Group  values={elements} onReorder={isRuntime? ()=>{} :setElements}>
                 {!!elements.length && elements.map(item => (
-                    <Reorder.Item key={item.id} value={item}>
+                    <Reorder.Item dragListener={!isRuntime} key={item.id} value={item} onDoubleClick={isRuntime? ()=>{} :() => deletedDnDPanelHandler(item.id)}>
                         {createElement(item)}
                     </Reorder.Item>
                 ))}
